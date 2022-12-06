@@ -1,12 +1,14 @@
-const inquirer = require("inquirer");
-inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
-const fs = require("fs");
-
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Intern = require("./lib/other");
+const Other = require("./lib/other");
+
+const inquirer = require("inquirer");
+//inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
+const fs = require("fs");
+
+
 
 const generateHtml = require("./utils/generateHtml");
 
@@ -20,7 +22,7 @@ const questions = () => {
                 "Manager",
                 "Engineer",
                 "Intern",
-                "Other"
+                "other"
             ],
         },
         {
@@ -62,7 +64,7 @@ const questions = () => {
                     choices: [
                         "Engineer",
                         "Intern",
-                        "Other"
+                        "other"
                     ],
                 }
             ]
@@ -105,3 +107,24 @@ const questions = () => {
         },
     ]);
 }
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) {
+            return console.log('SOMETHING FUCKED UP');
+        }
+
+        console.log("HTML file succesfully generated")
+    });
+}
+
+function promptUser() {
+    questions()
+        .then((response) => {
+            const madeHtml = generateHtml(response);
+            writeToFile('index.html', madeHtml);
+        });
+}
+
+
+promptUser();
