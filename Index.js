@@ -5,9 +5,8 @@ const Intern = require("./lib/Intern");
 const Other = require("./lib/other");
 
 const inquirer = require("inquirer");
-//inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
 const fs = require("fs");
-
+inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
 
 
 const generateHtml = require("./utils/generateHtml");
@@ -30,58 +29,50 @@ const questions = () => {
                 return input.teamMember === "Manager"
             },
             type: "input",
-            message: "Please enter the team manager's name.",
-            name: "Name",
+            message: "Please enter the team manager's name and ID number.",
+            name: "Mgmt",
             default: "No name listed"
         },
         {
-            type: "input",
-            message: "Please enter the manager's employee ID.",
-            name: "ID",
-            default: "No ID given"
-        },
-        {
+            when: input => {
+                return input.teamMember === "Manager"
+            },
             type: "input",
             message: "Please enter the manager's email address.",
             name: "Email",
             default: "No Email given"
         },
         {
+            when: input => {
+                return input.teamMember === "Manager"
+            },
             type: "input",
             message: "Please enter the manager's office number.",
             name: "ONumber",
             default: "No office number given"
         },
         {
-            type: "loop",
-            message: "Would you like to add a team member? press enter to skip ress ethis question and generate the HTML",
-            name: "addEmployee",
-            questions: [
-                {
-                    type: "list",
-                    message: "Which would you like to add?",
-                    name: "role",
-                    choices: [
-                        "Engineer",
-                        "Intern",
-                        "other"
-                    ],
-                }
-            ]
-        },
-        {
+            when: input => {
+                return input.role === "Engineer" || "Intern" || "other"
+            },
             type: "input",
             message: "Please enter the employee's name.",
-            name: "name",
+            name: "Ename",
             default: "no name given"
         },
         {
+            when: input => {
+                return input.role === "Engineer" || "Intern" || "other"
+            },
             type: "input",
             message: "Please enter the employee's ID.",
             name: "id",
             default: "no ID given"
         },
         {
+            when: input => {
+                return input.role === "Engineer" || "Intern" || "other"
+            },
             type: "input",
             message: "Please enter the employee's email address.",
             name: "email",
@@ -104,6 +95,11 @@ const questions = () => {
             message: "Please enter the intern's school.",
             name: "school",
             default: "no school given"
+        },
+        {
+            type: "loop",
+            message: "Would you like to add a team member? type (n) to generate HTML, select (y) to generate another team member",
+            name: "addEmployee",
         },
     ]);
 }
