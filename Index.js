@@ -10,7 +10,8 @@ inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
 
 
 const generateHtml = require("./utils/generateHtml");
-
+//seperate questions for each 
+//remove loop seperate, 4 sets of questions
 const questions = () => {
     return inquirer.prompt([
         {
@@ -34,7 +35,7 @@ const questions = () => {
             default: "No name listed"
         },
         {
-            when: input => {
+            if: input => {
                 return input.teamMember === "Manager"
             },
             type: "input",
@@ -43,7 +44,7 @@ const questions = () => {
             default: "No Email given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.teamMember === "Manager"
             },
             type: "input",
@@ -52,7 +53,7 @@ const questions = () => {
             default: "No office number given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.role === "Engineer" || "Intern" || "other"
             },
             type: "input",
@@ -61,7 +62,7 @@ const questions = () => {
             default: "no name given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.role === "Engineer" || "Intern" || "other"
             },
             type: "input",
@@ -70,7 +71,7 @@ const questions = () => {
             default: "no ID given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.role === "Engineer" || "Intern" || "other"
             },
             type: "input",
@@ -79,7 +80,7 @@ const questions = () => {
             default: "no email given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.role === "Engineer"
             },
             type: "input",
@@ -88,7 +89,7 @@ const questions = () => {
             default: "no github given"
         },
         {
-            when: input => {
+            if: input => {
                 return input.role === "Intern"
             },
             type: "input",
