@@ -101,8 +101,8 @@ const QuestionOther = () => {
             }
         })
 }
-function promptUser() 
-  .then(addEmployee)
+questionManager() 
+  .then(QuestionOther)
         .then(teamArray => {
             return generateHTML(teamArray);
         })
@@ -122,4 +122,3 @@ function writeToFile(fileName, data) {
         console.log("HTML file succesfully generated")
     });
 }
-promptUser();

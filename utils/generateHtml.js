@@ -1,4 +1,4 @@
-// Helper function which will loop over all object created from inquirer, and create cards for each
+
 function generateEmployeeCards(objArray) {
     let resultStr = '';
     for (obj of objArray) {
