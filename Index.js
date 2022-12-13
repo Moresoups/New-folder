@@ -101,17 +101,17 @@ const QuestionOther = () => {
             }
         })
 }
-questionManager() 
-  .then(QuestionOther)
-        .then(teamArray => {
-            return generateHTML(teamArray);
-        })
-        .then(pageHTML => {
-            return writeToFile(pageHTML);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+questionManager()
+    .then(QuestionOther)
+    .then(teamArray => {
+        return generateHTML(teamArray);
+    })
+    .then(pageHTML => {
+        return writeToFile(pageHTML);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, err => {
@@ -122,3 +122,5 @@ function writeToFile(fileName, data) {
         console.log("HTML file succesfully generated")
     });
 }
+
+const teamArray = [];
